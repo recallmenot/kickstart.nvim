@@ -71,7 +71,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  --'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -113,11 +113,13 @@ require('lazy').setup({
   },
 
   { -- Theme inspired by Atom
+    --[[
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'onedark'
     end,
+    --]]
   },
 
   { -- Set lualine as statusline
@@ -126,7 +128,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
@@ -191,7 +193,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -218,7 +220,7 @@ vim.o.smartcase = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 50
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
@@ -493,3 +495,32 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+-- Enable smart indent (apply previous indentation to new lines)
+vim.o.smartindent = true
+-- force vim to use tabs (disable if you like spaces better)
+--vim.o.expandtab = false
+--vim.o.tabstop = 4
+--vim.o.shiftwidth = 4
+vim.o.title = true
+
+-- enable unknown search terms like "objectname.* = 5"
+vim.o.incsearch = true
+-- keep some lines at bottom/top when scrolling
+vim.wo.scrolloff = 6
+
+
+
+
+-- move visual selection by up/down by lines
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'move selection down' })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
+
+-- easily replace the current word in this document
+
+vim.keymap.set("n", "<leader>rc", [[:%s/<C-r><C-w>/<C-r><C-w>/gi<Left><Left><Left>]], { desc = 'replace the current word in this document' })
+vim.keymap.set("n", "<leader>rc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<Left><Left><Left>]], { desc = 'replace the current word in this document' })
+
+
+
