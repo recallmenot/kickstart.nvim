@@ -521,7 +521,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
 -- easily replace the current word in this document
 
 vim.keymap.set("n", "<leader>rc", [[:%s/<C-r><C-w>/<C-r><C-w>/gi<Left><Left><Left>]], { desc = 'replace the current word in this document' })
-vim.keymap.set("n", "<leader>rc", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gi<Left><Left><Left>]], { desc = 'replace the current word in this document' })
 
 
 
