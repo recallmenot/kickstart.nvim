@@ -561,3 +561,6 @@ vim.keymap.set({"n", "o", "x"}, "E", "<cmd>lua require('spider').motion('e')<CR>
 vim.keymap.set({"n", "o", "x"}, "B", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
 vim.keymap.set({"n", "o", "x"}, "gE", "<cmd>lua require('spider').motion('ge')<CR>", { desc = "Spider-ge" })
 
+vim.keymap.set({"n", "o", "x"}, "zF", ":set foldmethod=expr <CR> :set foldexpr=nvim_treesitter#foldexpr() <CR> :set foldmethod=manual <CR>", { desc = "treesitter: generate folds" })
+
+vim.api.nvim_set_hl(0, 'Folded', {fg = "Cyan", bg = "Black" })
