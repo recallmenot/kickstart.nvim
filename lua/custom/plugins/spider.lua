@@ -1,6 +1,6 @@
 return {
     "chrisgrieser/nvim-spider",
-    lazy = true ,
+    lazy = false ,
     config = function()
         vim.keymap.set({"n", "o", "x"}, "W", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
         vim.keymap.set({"n", "o", "x"}, "E", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
