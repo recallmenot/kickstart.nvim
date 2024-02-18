@@ -717,3 +717,6 @@ vim.keymap.set("n", "<leader>rc", [[:%s/<C-r><C-w>/<C-r><C-w>/gi<Left><Left><Lef
 vim.keymap.set({"n", "o", "x"}, "zF", ":set foldmethod=expr <CR> :set foldexpr=nvim_treesitter#foldexpr() <CR> :set foldmethod=manual <CR>", { desc = "treesitter: generate folds" })
 
 vim.api.nvim_set_hl(0, 'Folded', {fg = "Cyan", bg = "Black" })
+
+-- easily exit from :term terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { noremap = true, desc = 'normal mode' })
