@@ -954,7 +954,8 @@ vim.keymap.set(
   { desc = 'treesitter: generate folds' }
 )
 
-vim.api.nvim_set_hl(0, 'Folded', { fg = 'Cyan', bg = 'Black' })
+--vim.api.nvim_set_hl(0, 'Folded', { fg = 'Cyan', bg = 'none' })
+--vim.api.nvim_set_hl(0, 'Normal', { fg = 'White', bg = 'none' })
 
 -- easily exit from :term terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true, desc = 'normal mode' })
