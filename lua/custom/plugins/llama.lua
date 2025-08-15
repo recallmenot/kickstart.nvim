@@ -30,8 +30,18 @@ if private_module_exists then
         keymap_accept_word = '<C-B>',
       }
     end,
+    config = function()
+      -- Defer LlamaDisable until plugin commands are available
+      vim.defer_fn(function()
+        -- Call disable function to remove mappings and autocommands
+        vim.fn['llama#disable']()
+      end, 100) -- Delay by 100ms to ensure plugin is loaded
+    end,
     lazy = false,
   }
+  vim.keymap.set({ 'n', 'o', 'x' }, '<leader>cle', '<cmd>LlamaEnable<cr>', { desc = 'enable llama.vim' })
+  vim.keymap.set({ 'n', 'o', 'x' }, '<leader>cld', '<cmd>LlamaDisable<cr>', { desc = 'disable llama.vim' })
+  vim.keymap.set({ 'n', 'o', 'x' }, '<leader>clt', '<cmd>LlamaToggle<cr>', { desc = 'toggle llama.vim' })
 else
   -- Return an empty plugin table if private.lua doesn't exist
   llama_config = {}
