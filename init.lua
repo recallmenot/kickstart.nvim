@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -174,6 +174,9 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -436,6 +439,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'telescope find file' })
+      vim.keymap.set('n', '<leader>fg', builtin.grep_string, { desc = 'telescope grep' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'telescope buffers' })
+      vim.keymap.set('n', '<leader>fr', builtin.git_files, { desc = 'telescope git repository' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -894,7 +902,10 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-night'
+
+      -- You can configure highlights by doing something like:
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 
@@ -984,7 +995,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
@@ -1014,3 +1025,37 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Enable smart indent (apply previous indentation to new lines)
+vim.o.smartindent = true
+-- force vim to use tabs (disable if you like spaces better)
+--vim.o.expandtab = false
+--vim.o.tabstop = 4
+--vim.o.shiftwidth = 4
+vim.o.title = true
+
+-- enable unknown search terms like "objectname.* = 5"
+vim.o.incsearch = true
+-- keep some lines at bottom/top when scrolling
+-- vim.wo.scrolloff = 10
+
+-- move visual selection by up/down by lines
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move selection down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
+
+-- easily replace the current word in this document
+
+vim.keymap.set('n', '<leader>rc', [[:%s/<C-r><C-w>/<C-r><C-w>/gi<Left><Left><Left>]], { desc = 'replace the current word in this document' })
+
+vim.keymap.set(
+  { 'n', 'o', 'x' },
+  'zF',
+  ':set foldmethod=expr <CR> :set foldexpr=nvim_treesitter#foldexpr() <CR> :set foldmethod=manual <CR>',
+  { desc = 'treesitter: generate folds' }
+)
+
+--vim.api.nvim_set_hl(0, 'Folded', { fg = 'Cyan', bg = 'none' })
+--vim.api.nvim_set_hl(0, 'Normal', { fg = 'White', bg = 'none' })
+
+-- easily exit from :term terminal mode
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true, desc = 'normal mode' })
