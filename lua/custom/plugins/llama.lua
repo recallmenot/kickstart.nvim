@@ -28,14 +28,8 @@ if private_module_exists then
         keymap_accept_full = '<Tab>',
         keymap_accept_line = '<S-Tab>',
         keymap_accept_word = '<C-B>',
+        enable_at_startup = false,
       }
-    end,
-    config = function()
-      -- Defer LlamaDisable until plugin commands are available
-      vim.defer_fn(function()
-        -- Call disable function to remove mappings and autocommands
-        vim.fn['llama#disable']()
-      end, 100) -- Delay by 100ms to ensure plugin is loaded
     end,
     lazy = false,
   }
