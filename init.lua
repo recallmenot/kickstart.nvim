@@ -1054,6 +1054,8 @@ vim.keymap.set(
   { desc = 'treesitter: generate folds' }
 )
 
+vim.keymap.set('n', '<leader>gc', ':cd %:h<CR>', { noremap = true, silent = true, desc = 'set CWD to parent of current file' })
+
 --vim.api.nvim_set_hl(0, 'Folded', { fg = 'Cyan', bg = 'none' })
 --vim.api.nvim_set_hl(0, 'Normal', { fg = 'White', bg = 'none' })
 
