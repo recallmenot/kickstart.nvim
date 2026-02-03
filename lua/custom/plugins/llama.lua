@@ -8,7 +8,7 @@ if private_module_exists then
     'ggml-org/llama.vim',
     init = function()
       vim.g.llama_config = {
-        endpoint = private.get_key 'llm_url' .. '/infill',
+        endpoint_fim = private.get_key 'llm_url' .. '/infill',
         api_key = private.get_key 'llm_api_key',
         n_prefix = 256,
         n_suffix = 64,
@@ -24,10 +24,10 @@ if private_module_exists then
         ring_chunk_size = 64,
         ring_scope = 1024,
         ring_update_ms = 1000,
-        keymap_trigger = '<C-F>',
-        keymap_accept_full = '<Tab>',
-        keymap_accept_line = '<S-Tab>',
-        keymap_accept_word = '<C-B>',
+        keymap_fim_trigger = '<C-F>',
+        keymap_fim_accept_full = '<Tab>',
+        keymap_fim_accept_line = '<S-Tab>',
+        keymap_fim_accept_word = '<C-B>',
         enable_at_startup = false,
       }
     end,
