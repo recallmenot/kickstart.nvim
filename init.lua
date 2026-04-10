@@ -949,6 +949,12 @@ vim.keymap.set(
 
 vim.keymap.set('n', '<leader>gc', ':cd %:h<CR>', { noremap = true, silent = true, desc = 'set CWD to parent of current file' })
 
+vim.keymap.set('n', '<leader>cw', function()
+  local save_cursor = vim.fn.getpos '.'
+  vim.cmd [[%s/\s\+$//e]]
+  vim.fn.setpos('.', save_cursor)
+end, { desc = 'Trim trailing whitespace' })
+
 --vim.api.nvim_set_hl(0, 'Folded', { fg = 'Cyan', bg = 'none' })
 --vim.api.nvim_set_hl(0, 'Normal', { fg = 'White', bg = 'none' })
 
