@@ -949,7 +949,7 @@ vim.keymap.set(
 
 vim.keymap.set('n', '<leader>gc', ':cd %:h<CR>', { noremap = true, silent = true, desc = 'set CWD to parent of current file' })
 
-vim.keymap.set('n', '<leader>cc', function()
+vim.keymap.set('n', '<leader>cr', function()
   local save_cursor = vim.fn.getpos '.'
   vim.cmd [[%s/\s\+$//e]]
   vim.cmd [[%s/\r//ge]]
